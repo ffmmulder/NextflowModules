@@ -15,8 +15,8 @@ process VerifyBamID2 {
         output_prefix = "${sample_id}.contamination"
 
         """
-        # creates a ${output_prefix}.selfSM file, a TSV file with 2 rows, 19 columns.
-        # First row are the keys (e.g., SEQ_SM, RG, FREEMIX), second row are the associated values
+        #creates a ${output_prefix}.selfSM file, a TSV file with 2 rows, 19 columns.
+        #First row are the keys (e.g., SEQ_SM, RG, FREEMIX), second row are the associated values
         verifybamid2 \
         --Reference ${params.genome} \
         --BamFile ${bam} \
