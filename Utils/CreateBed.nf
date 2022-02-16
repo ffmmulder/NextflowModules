@@ -9,7 +9,6 @@ process CreateBed {
     output:
         path ("${genome_index.baseName}.bed", emit: genome_bed)
 
-
     script:
         """
         awk -v FS='\t' -v OFS='\t' '{ print \$1, "0", \$2 }' ${genome_index} > ${genome_index.baseName}.bed

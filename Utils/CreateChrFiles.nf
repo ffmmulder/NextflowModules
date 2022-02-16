@@ -5,11 +5,9 @@ process CreateChrFiles {
 
     input:
         path genome_fasta
-//	path chr_files
 
     output:
         path ("./chr_files/", emit: chr_files)
-//        path ("${chr_files}", emit: chr_files)
 
     script:
         """

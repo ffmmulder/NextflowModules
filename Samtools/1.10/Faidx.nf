@@ -6,7 +6,6 @@ process Faidx {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
-        //tuple(path(fasta), path(fasta_out), chr_set)
         path(fasta)
         file(fasta_out)
         val(chr_set)
