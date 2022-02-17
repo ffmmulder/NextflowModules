@@ -1,5 +1,5 @@
 process Faidx {
-    tag {"Samtools Faidx ${fasta} ${chr_set} ${fasta_out}"}
+    tag {"Samtools Faidx ${fasta}"}
     label 'Samtools_1_10'
     label 'Samtools_1_10_Faidx'
     container = 'quay.io/biocontainers/samtools:1.10--h9402c20_2'
