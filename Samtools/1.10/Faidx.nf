@@ -10,7 +10,6 @@ process Faidx {
         file(fasta_out)
         val(chr_set)
 
-
     output:
         path("${fasta.name}.fai", emit: genome_faidx)
 
