@@ -7,18 +7,12 @@ process Faidx {
 
     input:
         path(fasta)
-        file(fasta_out)
-        val(chr_set)
 
     output:
         path("${fasta.name}.fai", emit: genome_faidx)
 
     script:
         """
-        if [[ "${chr_set}" == "" ]]; then
-            samtools faidx ${fasta}
-        else
-            samtools faidx ${fasta} ${chr_set} > ${fasta_out}
-        fi
+        samtools faidx ${fasta}
         """
 }
