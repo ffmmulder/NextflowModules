@@ -93,3 +93,18 @@ def extractAllFastqFromDir(dir) {
         [sample_id, rg_id, machine, run_nr ,fastq_files]
     }
 }
+
+def extractAllNanoporeFastqFromDir(dir) {
+    // Original code from: https://github.com/SciLifeLab/Sarek - MIT License - Copyright (c) 2016 SciLifeLab
+    dir = dir.tokenize().collect{"$it/*.fastq.gz"}
+    Channel
+    .fromPath(dir, type:'file')
+    .ifEmpty { error "No fastq.gz files found in ${dir}." }
+    .map { fastq_path ->
+        fastq_files = fastq_path
+        sample_id = fastq_path.getSimpleName().split('_')[0]
+        chunk = fastq_path.getSimpleName().split('_')[4]
+                
+        [sample_id, chunk, fastq_files]
+    }
+}
