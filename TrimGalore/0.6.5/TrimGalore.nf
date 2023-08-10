@@ -5,24 +5,31 @@ process TrimGalore {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
+<<<<<<< HEAD
         tuple(val(sample_id), val(rg_id), path(fastq_files)) 
 
     output:
         tuple(val(sample_id), val(rg_id), path("*fastq.gz"), emit: fastqs_trimmed) 
+=======
+        tuple(val(sample_id), val(rg_id), path(fastq_files))
+
+    output:
+        tuple(val(sample_id), val(rg_id), path("*fastq.gz"), emit: fastqs_trimmed)
+>>>>>>> 9fb570cf6539dfb67916a5d3a940e8cd2d8118b4
         path("*trimming_report.txt", emit: trimming_report)
-        path("*_fastqc.{zip,html}", optional: true, emit: fastqc_report) 
+        path("*_fastqc.{zip,html}", optional: true, emit: fastqc_report)
 
     script:
         if (params.single_end) {
             """
             trim_galore ${fastq_files} --gzip ${params.optional}
-            mv ${fastq_files[0].simpleName}_trimmed.fq.gz ${fastq_files[0].simpleName}_trimmed.fastq.gz 
+            mv ${fastq_files[0].simpleName}_trimmed.fq.gz ${fastq_files[0].simpleName}_trimmed.fastq.gz
             """
         } else {
             """
             trim_galore ${fastq_files} --paired --gzip ${params.optional}
-            mv ${fastq_files[0].simpleName}_val_1.fq.gz ${fastq_files[0].simpleName}_trimmed.fastq.gz 
-            mv ${fastq_files[1].simpleName}_val_2.fq.gz ${fastq_files[1].simpleName}_trimmed.fastq.gz 
+            mv ${fastq_files[0].simpleName}_val_1.fq.gz ${fastq_files[0].simpleName}_trimmed.fastq.gz
+            mv ${fastq_files[1].simpleName}_val_2.fq.gz ${fastq_files[1].simpleName}_trimmed.fastq.gz
             """
         }
 }

@@ -7,10 +7,17 @@ process SNPEffFilter {
     container = 'library://sawibo/default/bioinf-tools:snpeff-4.3t'
     shell = ['/bin/bash', '-euo', 'pipefail']
     input:
+<<<<<<< HEAD
         tuple (val(run_id), path(vcf), path(vcfidx))
 
     output:
         tuple (val(run_id), path("${vcf.baseName}.filtered_variants.vcf"), path("${vcf.baseName}.filtered_variants.vcf.idx"), emit: snpeff_filtered_vcfs)
+=======
+        tuple(val(run_id), path(vcf), path(vcfidx))
+
+    output:
+        tuple(val(run_id), path("${vcf.baseName}.filtered_variants.vcf"), path("${vcf.baseName}.filtered_variants.vcf.idx"), emit: snpeff_filtered_vcfs)
+>>>>>>> 9fb570cf6539dfb67916a5d3a940e8cd2d8118b4
 
     script:
         """

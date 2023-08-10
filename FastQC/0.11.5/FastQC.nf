@@ -7,7 +7,11 @@ process FastQC {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
+<<<<<<< HEAD
         tuple (val(sample_id), val(rg_id), path(fastq) )
+=======
+        tuple(val(sample_id), val(rg_id), path(fastq))
+>>>>>>> 9fb570cf6539dfb67916a5d3a940e8cd2d8118b4
 
     output:
         path("*_fastqc.{zip,html}", emit: fastqc_reports)
