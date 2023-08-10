@@ -10,7 +10,7 @@ process ConvertGffToGtf {
         path(gff)
 
     output:
-        path("*.gtf")
+        path( "${gff.simpleName}.gtf", emit: gtf)
 
     script:
         """

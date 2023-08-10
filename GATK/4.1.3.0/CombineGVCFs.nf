@@ -5,10 +5,12 @@ process CombineGVCFs {
     clusterOptions = workflow.profile == "sge" ? "-l h_vmem=${params.mem}" : ""
     container = 'library://sawibo/default/bioinf-tools:gatk4.1.3.0'
     shell = ['/bin/bash', '-euo', 'pipefail']
+
     input:
       tuple (run_id, interval, path(gvcf_chunks), path(gvcf_chunk_idxs), path(interval_file))
+
     output:
-      tuple (run_id, interval, path("${run_id}.${interval}.g.vcf"), path("${run_id}.${interval}.g.vcf.idx"), path(interval_file), emit: combined_gvcfs)
+      tuple (run_id, interval, path("${run_id}.${interval}.g.vcf.gz"), path("${run_id}.${interval}.g.vcf.gz.tbi"), path(interval_file), emit: combined_gvcfs)
 
     script:
         vcfs = gvcf_chunks.join(' -V ')
@@ -18,7 +20,7 @@ process CombineGVCFs {
         CombineGVCFs \
         -R ${params.genome_fasta} \
         -V $vcfs \
-        -O ${run_id}.${interval}.g.vcf \
+        -O ${run_id}.${interval}.g.vcf.gz \
         -L $interval_file
         """
 }
