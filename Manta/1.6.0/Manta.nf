@@ -6,10 +6,17 @@ process Manta {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
+<<<<<<< HEAD
         tuple (val(sample_id), path(bam_file), path(bai_file))
 
     output:
         tuple (val(sample_id), path("*.candidateSmallIndels.*"),path("*.candidateSV.*"),path("*.diploidSV.*"), emit: sv )
+=======
+        tuple(val(sample_id), path(bam_file), path(bai_file))
+
+    output:
+        tuple(val(sample_id), path("*.candidateSmallIndels.*"),path("*.candidateSV.*"),path("*.diploidSV.*"), emit: sv)
+>>>>>>> 9fb570cf6539dfb67916a5d3a940e8cd2d8118b4
 
     script:
         """

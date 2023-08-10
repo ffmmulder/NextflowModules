@@ -2,14 +2,21 @@ process BWAMapping {
     tag {"BWA Mem ${sample_id} - ${rg_id}"}
     label 'BWA_0_7_17'
     label 'BWA_0_7_17_Mem'
-    container = 'library://sawibo/default/bioinf-tools:bwa-0.7.17_samtools-1.9'
+    container = 'library://library.sylabs.io/sawibo/default/bioinf-tools:bwa-0.7.17_samtools-1.9'
     shell = ['/bin/bash', '-euo', 'pipefail']
-    
+
     input:
+<<<<<<< HEAD
         tuple (val(sample_id), val(rg_id), path(fastq))
 
     output:
         tuple (val(sample_id), val(rg_id), path("${rg_id}_sorted.bam"), path("${rg_id}_sorted.bai"), emit: mapped_bams)
+=======
+        tuple(val(sample_id), val(rg_id), path(fastq))
+
+    output:
+        tuple(val(sample_id), val(rg_id), path("${rg_id}_sorted.bam"), path("${rg_id}_sorted.bai"), emit: mapped_bams)
+>>>>>>> 9fb570cf6539dfb67916a5d3a940e8cd2d8118b4
 
     script:
         def barcode = rg_id.split('_')[1]
