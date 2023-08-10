@@ -1,4 +1,3 @@
-
 process RSeQC {
     tag {"RSeQC ${sample_id}"}
     label 'RSeQC_3_0_1'
@@ -6,7 +5,7 @@ process RSeQC {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
-        tuple(sample_id, path(bam_file), path(bai_file))
+        tuple(val(sample_id), path(bam_file), path(bai_file))
         path(genome_bed12)
 
     output:
@@ -32,7 +31,7 @@ process RSeQC_TIN {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
-        tuple(sample_id, path(bam_file), path(bai_file))
+        tuple(val(sample_id), path(bam_file), path(bai_file))
         path(genome_bed12)
 
     output:

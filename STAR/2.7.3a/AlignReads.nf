@@ -6,13 +6,13 @@ process AlignReads {
     shell = ['/bin/bash', '-euo', 'pipefail']
 
     input:
-        tuple(sample_id, rg_id, path(fastqs))
+        tuple(val(sample_id), val(rg_id), path(fastqs))
         path(star_genome_index)
         path(genome_gtf)
      
 
     output:
-        tuple(sample_id, rg_id, path("${sample_id}_Aligned.sortedByCoord.out.bam"), emit: bam_file)
+        tuple(val(sample_id), val(rg_id), path("${sample_id}_Aligned.sortedByCoord.out.bam"), emit: bam_file)
         path("*Log.final.out", emit: final_log)
         path("*Log.out", emit: log)
         path("*SJ.out.tab", emit: sj_table)
@@ -34,5 +34,7 @@ process AlignReads {
             --outSAMtype BAM SortedByCoordinate \
             --runThreadN ${task.cpus} \
             --outSAMattrRGline ID:${sample_id} LB:${sample_id} PL:IllUMINA PU:${barcode} SM:${sample_id}  
+
+        for f in *_Unmapped.*; do gzip \${f}; done
         """
 }
